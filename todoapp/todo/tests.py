@@ -10,8 +10,15 @@ from rest_framework.test import APITestCase
 class TodoTests(TestCase):
     fixtures = ['todo']
     def setUp(self):
+        self.user = User.objects.create_user(
+            username = "sampleuser1",
+            email = "sampleuser1@gmail.com",
+            first_name = "fname",
+            last_name = "fname",
+            password="123"
+        )
         self.instance = TodoLists.objects.create(
-            user_id = 52,
+            user_id = self.user.id,
             title = 'test title',
             description = 'test description',
             scheduled_at = '2023-01-01',
@@ -25,7 +32,7 @@ class TodoTests(TestCase):
         with self.subTest('Todo Description Match'):
             self.assertEqual(self.instance.description, 'test description')
         with self.subTest('Todo User Match'):
-            self.assertEqual(self.instance.user.id, 52)
+            self.assertEqual(self.instance.user.id, self.user.id)
         with self.subTest('Todo Status Match'):
             self.assertEqual(self.instance.status, 1)
         with self.subTest('Todo Scheduled_at Match'):
@@ -38,7 +45,7 @@ class TodoCRUDTests(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             username = "sampleuser",
-            email = "sampleuser",
+            email = "sampleuser@gmail.com",
             first_name = "fname",
             last_name = "fname",
             password="123"
@@ -80,7 +87,7 @@ class TodoCRUDTests(APITestCase):
 
         with self.subTest(f'=== test_post(self) status code check from data dict=='):
             self.assertEqual(data["status"], 200)
-            
+
         with self.subTest(f'=== test_post(self) created data values check=='):
             self.assertEqual(payload, created_data)
         
