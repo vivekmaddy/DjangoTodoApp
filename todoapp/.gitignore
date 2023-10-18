@@ -1,0 +1,44 @@
+# Ignore Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore database files
+db.sqlite3
+
+# Ignore environment-specific settings
+.env
+
+# Ignore system and temporary files
+*.log
+*.swp
+*.swo
+
+# Ignore media and static files (if you're using the default settings)
+/media/
+/static/
+
+# Ignore secret and sensitive files
+secret_key.txt
+
+# Ignore IDE and editor-specific files
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln
+
+# Ignore dependencies
+venv/
+.env/
+
+# Ignore local settings (if you have local settings)
+local_settings.py
+
+# Ignore backup files
+*~
+
+# Ignore compiled JavaScript and CSS
+*.js.map
+*.css.map
